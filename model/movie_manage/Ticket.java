@@ -10,9 +10,9 @@ public class Ticket {
     private final String cinemaName;
     private final String showTime;
     private final double price;
-    private final String ticketType;
+    private String ticketType;
     private final int seatNumber;
-    private final String status;
+    private String status;
 
     public Ticket(String userName, String movieName, String theaterName, String cinemaName, String showTime, double price, String ticketType, int seatNumber, String status) {
         this.ticketId = nextId++;
@@ -58,8 +58,16 @@ public class Ticket {
         return ticketType;
     }
 
+    public void setTicketType(String ticketType) {
+        this.ticketType = ticketType;
+    }
+
     public String getStatus() {
         return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

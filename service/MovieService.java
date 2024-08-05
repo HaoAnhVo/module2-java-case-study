@@ -32,12 +32,11 @@ public class MovieService {
         movie3.addShowTime("CGV Đà Nẵng", "Room 7", new ShowTime("2024-09-27 16:45", "2024-09-27 19:00", "Room 7", "CGV Đà Nẵng"));
         movie3.addShowTime("CGV Hà Nội", "Room 9", new ShowTime("2024-09-26 21:00", "2024-09-26 22:30", "Room 9", "CGV Hà Nội"));
 
-        if (movies.isEmpty()) {
-            movies.put("Movie 1", movie1);
-            movies.put("Movie 2", movie2);
-            movies.put("Movie 3", movie3);
-            writeMoviesToFile(movies);
-        }
+        movies.put("Movie 1", movie1);
+        movies.put("Movie 2", movie2);
+        movies.put("Movie 3", movie3);
+        writeMoviesToFile(movies);
+
     }
 
     public void addMovie(String name, String genre, String duration, String image, String trailer, String

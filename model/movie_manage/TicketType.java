@@ -2,7 +2,7 @@ package case_study.model.movie_manage;
 
 public enum TicketType {
     REGULAR(10.0),
-    VIP(16.0);
+    VIP(20.0);
 
     private final double price;
 

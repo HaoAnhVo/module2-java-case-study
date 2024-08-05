@@ -1,5 +1,2 @@
-User name,Name,Email,Phone number,Role
-phuc,phuc@gmail.com,0986352784,[ROLE_USER,[ROLE_USER]
-admin,admin,CGVAdmin.com,0123456789,[ROLE_USER, ROLE_ADMIN]
-nhi,nhi@gmail.com,01225006565,[ROLE_USER,[ROLE_USER]
-hao,haovo.2606@gmail.com,0775006565,[ROLE_USER],[ROLE_USER]
+UserName,Password,Name,Email,PhoneNumber,Role
+admin,1,admin,CGVAdmin.com,0123456789,[ROLE_USER, ROLE_CUSTOMER]

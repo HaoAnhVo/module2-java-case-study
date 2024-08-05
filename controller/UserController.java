@@ -657,8 +657,15 @@ public class UserController {
             return;
         }
 
-        ticketService.bookTicket(users, customers, username, cinemaName, theaterName, movieName, showTime, seatNumber, ticketType);
-        userView.displayMessage("Ticket booking successful!");
+        Ticket ticket = new Ticket(username, movieName, theaterName, cinemaName, showTime, ticketType.getPrice(), ticketType.name(), seatNumber, "PENDING");
+        new PaymentController().processPayment(ticket);
+
+        if (ticket.getStatus().equals("PAID")) {
+            ticketService.bookTicket(users, customers, username, ticket);
+            userView.displayMessage("Ticket booking successful!");
+        } else {
+            userView.displayMessage("Ticket booking failed. Payment was not successful.");
+        }
     }
 
     private String selectMovie() {

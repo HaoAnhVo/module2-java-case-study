@@ -6,7 +6,6 @@ import case_study.model.account_manage.User;
 import case_study.model.cinema_manage.Cinema;
 import case_study.model.movie_manage.Movie;
 import case_study.model.movie_manage.Ticket;
-import case_study.model.movie_manage.TicketType;
 
 
 import java.io.BufferedReader;
@@ -35,19 +34,14 @@ public class TicketService {
     }
 
 
-    public void bookTicket(Map<String, User> users, Map<String, Customer> customers, String username, String cinemaName, String theaterName, String movieName, String showTime, int seatNumber, TicketType ticketType) {
-
-        User user = users.get(username);
-        double price = ticketType.getPrice();
-        Ticket ticket = new Ticket(username, movieName, theaterName, cinemaName, showTime, price, ticketType.name(), seatNumber, "Đã đặt");
+    public void bookTicket(Map<String, User> users, Map<String, Customer> customers, String username, Ticket ticket) {
         tickets.add(ticket);
         writeTicketsToFile(tickets);
-
+        User user = users.get(username);
         if (user != null && !user.getRoles().contains(Role.ROLE_CUSTOMER)) {
             System.out.println("Your account has been granted ROLE_CUSTOMER");
             Customer customer = new Customer(user.getUsername(), user.getPassword(), user.getName(), user.getEmail(), user.getPhoneNumber());
             customers.put(username, customer);
-            System.out.println(customers);
             user.addRole(Role.ROLE_CUSTOMER);
             userService.addRoleToUser(username, Role.ROLE_CUSTOMER);
         }
@@ -103,7 +97,7 @@ public class TicketService {
         return true;
     }
 
-    private void writeTicketsToFile(List<Ticket> tickets) {
+     private void writeTicketsToFile(List<Ticket> tickets) {
         try (FileWriter writer = new FileWriter(TICKETS_FILE_PATH)) {
             writer.append("TicketId,UserName,MovieName,TheaterName,CinemaName,ShowTime,Price,TicketType,SeatNumber,Status\n");
             for (Ticket ticket : tickets) {
@@ -125,7 +119,7 @@ public class TicketService {
                         .append(',')
                         .append(String.valueOf(ticket.getSeatNumber()))
                         .append(',')
-                        .append(ticket.getStatus())
+                        .append(String.valueOf(ticket.getStatus()))
                         .append('\n');
             }
         } catch (IOException ioe) {
